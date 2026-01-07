@@ -1,0 +1,37 @@
+:root {
+    /* Colors - Deep Space Theme */
+    --bg-dark: #0a0b1e;
+    --bg-card: rgba(22, 23, 43, 0.7);
+    --bg-card-hover: rgba(30, 32, 60, 0.8);
+
+    --primary: #6366f1;
+    /* Indigo */
+    --primary-glow: rgba(99, 102, 241, 0.5);
+
+    --accent: #10b981;
+    /* Emerald/Neon Green for Value */
+    --accent-glow: rgba(16, 185, 129, 0.4);
+
+    --text-main: #ffffff;
+    --text-muted: #9ca3af;
+
+    --border: rgba(255, 255, 255, 0.1);
+
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    --backdrop-blur: blur(10px);
+
+    /* Spacing */
+    --radius-md: 12px;
+    --radius-lg: 24px;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}

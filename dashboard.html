@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaStream Terminal</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .signal-row {
+            transition: all 0.3s ease;
+        }
+
+        .signal-row:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .type-LONG {
+            color: #00ff41;
+        }
+
+        .type-SHORT {
+            color: #ff3333;
+        }
+
+        .type-NEUTRAL {
+            color: #888;
+        }
+
+        /* Terminal Blink cursor */
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white h-screen overflow-hidden flex flex-col">
+
+    <!-- Top Bar -->
+    <header class="border-b border-gray-800 p-4 bg-gray-900/50 flex justify-between items-center backdrop-blur-md">
+        <div class="flex items-center gap-4">
+            <div class="text-xl font-bold mono tracking-tighter">ALPHA<span class="text-[#00ff41]">STREAM</span> <span
+                    class="text-xs text-gray-500 border border-gray-600 px-1 rounded">PRO</span></div>
+            <div class="h-4 w-[1px] bg-gray-700"></div>
+            <div id="status-indicator" class="text-xs font-mono text-[#00ff41] flex items-center gap-2">
+                <span class="w-2 h-2 bg-[#00ff41] rounded-full animate-pulse"></span> SYSTEM ONLINE
+            </div>
+        </div>
+        <div class="text-xs font-mono text-gray-400">
+            SESSION_ID: <span class="text-white">user_88291</span>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 border-r border-gray-800 bg-gray-900/30 hidden md:block p-4">
+            <div class="text-xs font-mono text-gray-500 mb-4 px-2">MARKET SCANNERS</div>
+            <nav class="space-y-1">
+                <a href="#" id="nav-feed" onclick="switchView('feed')"
+                    class="block px-3 py-2 bg-[#00ff41]/10 text-[#00ff41] border-l-2 border-[#00ff41] text-sm font-medium transition-all">Live
+                    Feed</a>
+                <a href="#" id="nav-correlation" onclick="switchView('correlation')"
+                    class="block px-3 py-2 text-gray-400 border-l-2 border-transparent hover:bg-gray-800 hover:text-white text-sm transition-all">Correlation
+                    Matrix</a>
+                <a href="#" id="nav-whales" onclick="switchView('whales')"
+                    class="block px-3 py-2 text-gray-400 border-l-2 border-transparent hover:bg-gray-800 hover:text-white text-sm transition-all">Whale
+                    Alerts</a>
+                <a href="#" id="nav-settings" onclick="switchView('settings')"
+                    class="block px-3 py-2 text-gray-400 border-l-2 border-transparent hover:bg-gray-800 hover:text-white text-sm transition-all">Settings</a>
+            </nav>
+
+            <div class="mt-8 border-t border-gray-800 pt-4">
+                <div class="text-xs font-mono text-gray-500 mb-2 px-2">SENTIMENT</div>
+                <div id="sentiment" class="text-xl font-mono text-white px-2">LOADING...</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 overflow-y-auto relative">
+
+            <!-- VIEW: Live Feed -->
+            <div id="view-feed" class="view-section">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Main Feed -->
+                    <div class="lg:col-span-2">
+                        <h2 class="text-lg font-mono mb-4 flex items-center gap-2">
+                            > INCOMING SIGNALS <span class="blink">_</span>
+                        </h2>
+
+                        <div class="bg-gray-900/50 border border-gray-800 rounded-lg overflow-hidden">
+                            <table class="w-full text-left text-sm font-mono">
+                                <thead class="bg-gray-800 text-gray-400">
+                                    <tr>
+                                        <th class="p-3">TIME</th>
+                                        <th class="p-3">PAIR</th>
+                                        <th class="p-3">TYPE</th>
+                                        <th class="p-3">ENTRY</th>
+                                        <th class="p-3">CONFIDENCE</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="signal-table-body" class="divide-y divide-gray-800">
+                                    <tr>
+                                        <td colspan="5" class="p-4 text-center text-gray-500">Connecting to feed...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Side Widgets -->
+                    <div class="space-y-6">
+                        <div
+                            class="bg-gray-900/50 border border-gray-800 rounded-lg p-4 h-64 flex flex-col items-center justify-center text-gray-600 font-mono text-xs">
+                            [TRADINGVIEW WIDGET PLACEHOLDER]
+                            <br>LOADING CHART DATA...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: Correlation Matrix -->
+            <div id="view-correlation" class="view-section hidden">
+                <h2 class="text-lg font-mono mb-4">> CORRELATION HEATMAP</h2>
+                <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-8 flex items-center justify-center h-96">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">📊</div>
+                        <h3 class="text-xl text-white mb-2">Matrix Loading...</h3>
+                        <p class="text-gray-500 font-mono text-sm max-w-md">Calculating Pearson coefficients for top 50
+                            pairs. Please wait for the next cycle.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: Whale Alerts -->
+            <div id="view-whales" class="view-section hidden">
+                <h2 class="text-lg font-mono mb-4">> WHALE MOVEMENTS (> $100k)</h2>
+                <div class="space-y-4">
+                    <div
+                        class="bg-gray-900/50 border border-gray-800 rounded p-4 flex justify-between items-center text-sm font-mono">
+                        <div>
+                            <span class="text-[#00ff41] font-bold">BUY</span>
+                            <span class="text-white">SOL/USDT</span>
+                        </div>
+                        <div class="text-gray-400">Amount: <span class="text-white">$1,240,000</span></div>
+                        <div class="text-xs text-gray-500">2 mins ago</div>
+                    </div>
+                    <div
+                        class="bg-gray-900/50 border border-gray-800 rounded p-4 flex justify-between items-center text-sm font-mono">
+                        <div>
+                            <span class="text-[#ff3333] font-bold">SELL</span>
+                            <span class="text-white">BTC/USDT</span>
+                        </div>
+                        <div class="text-gray-400">Amount: <span class="text-white">$5,890,200</span></div>
+                        <div class="text-xs text-gray-500">8 mins ago</div>
+                    </div>
+                    <div
+                        class="bg-gray-900/50 border border-gray-800 rounded p-4 flex justify-between items-center text-sm font-mono">
+                        <div>
+                            <span class="text-[#00ff41] font-bold">BUY</span>
+                            <span class="text-white">ETH/USDT</span>
+                        </div>
+                        <div class="text-gray-400">Amount: <span class="text-white">$892,100</span></div>
+                        <div class="text-xs text-gray-500">12 mins ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: Settings -->
+            <div id="view-settings" class="view-section hidden">
+                <h2 class="text-lg font-mono mb-4">> SYSTEM CONFIGURATION</h2>
+                <div class="max-w-xl bg-gray-900/50 border border-gray-800 rounded-lg p-6">
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-mono text-gray-500 mb-2">API KEY</label>
+                            <input type="password" value="sk_production_88291_xxxxx"
+                                class="w-full bg-black border border-gray-700 text-white rounded p-2 text-sm font-mono"
+                                readonly>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono text-gray-500 mb-2">NOTIFICATIONS</label>
+                            <div class="flex items-center gap-3">
+                                <button class="w-10 h-5 bg-[#00ff41] rounded-full relative">
+                                    <div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+                                </button>
+                                <span class="text-sm">Desktop Alerts</span>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-gray-800">
+                            <button
+                                class="btn border border-[#ff3333] text-[#ff3333] px-4 py-2 text-sm hover:bg-[#ff3333] hover:text-white transition">DISCONNECT
+                                SESSION</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // View Switching Logic
+        function switchView(viewName) {
+            // Hide all views
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            // Show selected view
+            document.getElementById(`view-${viewName}`).classList.remove('hidden');
+
+            // Reset all nav links
+            document.querySelectorAll('nav a').forEach(el => {
+                el.className = 'block px-3 py-2 text-gray-400 border-l-2 border-transparent hover:bg-gray-800 hover:text-white text-sm transition-all';
+            });
+
+            // Highlight active nav link
+            const activeLink = document.getElementById(`nav-${viewName}`);
+            activeLink.className = 'block px-3 py-2 bg-[#00ff41]/10 text-[#00ff41] border-l-2 border-[#00ff41] text-sm font-medium transition-all';
+        }
+
+        async function fetchData() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+
+                // Update Sentiment
+                document.getElementById('sentiment').innerText = data.market_sentiment;
+                document.getElementById('sentiment').className = `text-xl font-mono px-2 ${data.market_sentiment === 'BULLISH' ? 'text-[#00ff41]' : data.market_sentiment === 'BEARISH' ? 'text-[#ff3333]' : 'text-gray-400'}`;
+
+                // Update Signal Table
+                const tbody = document.getElementById('signal-table-body');
+                if (tbody) {
+                    tbody.innerHTML = '';
+                    data.active_signals.forEach(sig => {
+                        const row = `
+                            <tr class="signal-row">
+                                <td class="p-3 text-gray-400">${sig.timestamp}</td>
+                                <td class="p-3 font-bold text-white">${sig.pair}</td>
+                                <td class="p-3 ${sig.type === 'LONG' ? 'text-[#00ff41]' : sig.type === 'SHORT' ? 'text-[#ff3333]' : 'text-gray-500'}">${sig.type}</td>
+                                <td class="p-3 text-white">${sig.entry_price}</td>
+                                <td class="p-3">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-16 h-1 bg-gray-700 rounded-full overflow-hidden">
+                                            <div class="h-full bg-[#00ff41]" style="width: ${sig.confidence}%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-400">${sig.confidence}%</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                        tbody.innerHTML += row;
+                    });
+                }
+
+            } catch (e) {
+                console.error("Error fetching data:", e);
+            }
+        }
+
+        // Poll every 3 seconds
+        setInterval(fetchData, 3000);
+        fetchData(); // Initial call
+    </script>
+</body>
+
+</html>

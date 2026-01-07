@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaStream | Institutional Grade Signals</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <!-- Added Tailwind for quick layout utilities if needed, but primarily using custom CSS -->
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 left-0 p-6">
+        <div class="container flex justify-between items-center">
+            <div class="text-2xl font-bold mono tracking-tighter text-white">ALPHA<span class="text-[#00ff41]">STREAM</span></div>
+            <a href="dashboard.html" class="text-sm uppercase tracking-widest text-gray-400 hover:text-white transition">Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero relative">
+        <div class="container z-10">
+            <div class="inline-block border border-[#00ff41] bg-[#00ff41]/10 px-4 py-1 rounded-full text-[#00ff41] text-xs font-mono mb-6 animate-pulse">
+                SYSTEM STATUS: ONLINE // SIGNAL: BUY
+            </div>
+            <h1 class="leading-tight">STOP GUESSING.<br>START <span class="text-[#00ff41]">PRINTING.</span></h1>
+            <p>Access the same high-frequency correlation algorithms used by institutional desks. No noise. Just pure alpha.</p>
+            <div class="flex gap-4 justify-center mt-8">
+                <a href="#pricing" class="btn btn-primary">Get Access ($99/mo)</a>
+                <a href="#proof" class="btn">View Performance</a>
+            </div>
+        </div>
+        <!-- Abstract Background Grid -->
+        <div class="absolute inset-0 z-0 opacity-20" style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 50px 50px;"></div>
+    </section>
+
+    <!-- Stats / Proof -->
+    <section id="proof" class="py-20 bg-[#0a0a0a]">
+        <div class="container">
+            <h2 class="text-3xl text-center mb-12 text-white">LIVE PERFORMANCE (LAST 30 DAYS)</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">+142%</span>
+                    <span class="stat-label">Net Return</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">87%</span>
+                    <span class="stat-label">Win Rate</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">4.2</span>
+                    <span class="stat-label">Profit Factor</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Features -->
+    <section id="pricing" class="py-20">
+        <div class="container max-w-4xl text-center">
+            <h2 class="text-4xl mb-6 text-white">LIMITED BETA ACCESS</h2>
+            <p class="text-gray-400 mb-10">We are limiting access to 50 active traders to prevent alpha decay.</p>
+            
+            <div class="stat-card border-[#00ff41] border-2 relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-[#00ff41] text-black text-xs font-bold px-3 py-1 font-mono">5 SPOTS LEFT</div>
+                <h3 class="text-3xl text-white mb-2">PRO TERMINAL</h3>
+                <div class="text-5xl font-mono text-[#00ff41] mb-6">$99<span class="text-lg text-gray-500">/mo</span></div>
+                
+                <ul class="text-left max-w-xs mx-auto space-y-4 mb-8 text-gray-300">
+                    <li class="flex items-center gap-3"><span class="text-[#00ff41]">✓</span> Real-time SOL/BTC Signals</li>
+                    <li class="flex items-center gap-3"><span class="text-[#00ff41]">✓</span> Correlation Scanners</li>
+                    <li class="flex items-center gap-3"><span class="text-[#00ff41]">✓</span> 15m & 1H Trend Alerts</li>
+                    <li class="flex items-center gap-3"><span class="text-[#00ff41]">✓</span> Private Discord Access</li>
+                </ul>
+
+                <a href="dashboard.html" class="btn btn-primary w-full">SECURE YOUR SPOT</a>
+                <p class="text-xs text-gray-500 mt-4">Cancel anytime. 7-day money-back guarantee.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 AlphaStream Technologies. Trading involves risk.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
