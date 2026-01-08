@@ -30,7 +30,11 @@ const PredictionCard = ({ prediction }) => {
                 </div>
             </div>
 
-            <button className="btn-primary" style={{ width: '100%', marginTop: 'auto', padding: '10px' }}>
+            <button
+                className="btn-primary"
+                style={{ width: '100%', marginTop: 'auto', padding: '10px' }}
+                onClick={() => window.open('https://www.betclic.fr', '_blank')}
+            >
                 Bet Now
             </button>
         </div>

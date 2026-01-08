@@ -30,7 +30,7 @@ const Dashboard = () => {
                     alignItems: 'center',
                     marginBottom: '30px'
                 }}>
-                    <h2 style={{ fontSize: '2em' }}>Live Value Bets</h2>
+                    <h2 id="predictions" style={{ fontSize: '2em', scrollMarginTop: '20px' }}>Live Value Bets</h2>
                     <div style={{ display: 'flex', gap: '10px' }}>
                         <span className="glass-card" style={{ padding: '8px 16px', fontSize: '0.9em' }}>Football</span>
                         <span className="glass-card" style={{ padding: '8px 16px', fontSize: '0.9em' }}>Tennis</span>

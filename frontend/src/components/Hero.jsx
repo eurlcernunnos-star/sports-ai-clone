@@ -38,13 +38,20 @@ const Hero = () => {
                     Our advanced machine learning models analyze thousands of data points to find value bets with positive expected return.
                 </p>
                 <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
-                    <button className="btn-primary">Get Free Predictions</button>
+                    <button
+                        className="btn-primary"
+                        onClick={() => document.getElementById('predictions')?.scrollIntoView({ behavior: 'smooth' })}
+                    >
+                        Get Free Predictions
+                    </button>
                     <button className="glass-card" style={{
                         padding: '12px 24px',
                         color: 'white',
                         fontWeight: '600',
                         cursor: 'pointer'
-                    }}>
+                    }}
+                        onClick={() => window.alert("ROI Performance: +124% Last Month\n(This is a demo feature)")}
+                    >
                         View ROI Performance
                     </button>
                 </div>
